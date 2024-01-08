@@ -9,7 +9,7 @@ module timer(clk,reset,DVSR,tick);
     reg [10:0] r_reg;   // 10 bit register to keep counter
 
     // -- Control Counter -- //
-    always @(posedge clk or negedge reset) begin
+    always @(posedge clk or posedge reset) begin
         if(reset) 
             r_reg <= 0;
         else if (r_reg == DVSR) //If counter reaches the dvst, reset counter
@@ -19,7 +19,7 @@ module timer(clk,reset,DVSR,tick);
     end
 
     // -- Control Tick -- //
-    always @(posedge clk or negedge reset) begin
+    always @(posedge clk or posedge reset) begin
         if(reset)
             tick <= 0;
         else if(r_reg == DVSR) // If counter reaches the DVSR, trigger tick 
