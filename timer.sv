@@ -19,7 +19,7 @@ module timer(clk,reset,DVSR,tick);
     end
 
     // -- Control Tick -- //
-    always @(posedge clk) begin
+    always @(posedge clk or negedge reset) begin
         if(reset)
             tick <= 0;
         else if(r_reg == DVSR) // If counter reaches the DVSR, trigger tick 
