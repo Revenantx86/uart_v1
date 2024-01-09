@@ -40,6 +40,7 @@ module uart #
     output reg txd,
 );
 
+// internal reg & wires
 wire baud_clk;
 reg dvsr;
 
