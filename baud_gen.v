@@ -1,12 +1,14 @@
-module baud_gen #( parameter DVSR_WIDTH = 8 ) (clk,reset,dvsr,tick);
+module baud_gen #( 
+    //parameter DVSR_WIDTH = 8 
+    ) (clk,reset,dvsr,tick);
 
     // Wire and register definitions // 
     input wire clk; 
     input wire reset;
-    input wire [DVSR_WIDTH-1:0] dvsr; // 10 bit divisior value
+    input wire [8-1:0] dvsr; // 10 bit divisior value
     output reg tick;    // output trigger
 
-    reg [DVSR_WIDTH-1:0] r_reg;   // 10 bit register to keep counter
+    reg [8-1:0] r_reg;   // 10 bit register to keep counter
 
     // -- Control Counter -- //
     always @(posedge clk or posedge reset) begin

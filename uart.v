@@ -28,8 +28,8 @@
 
 module uart # 
 ( 
-    parameter DATA_WIDTH = 8 
-    parameter DVSR_WIDTH = 8;
+    //parameter DATA_WIDTH = 8 
+    //parameter DVSR_WIDTH = 8;
 ) 
 (
     input wire clk,
@@ -44,7 +44,9 @@ wire baud_clk;
 reg dvsr;
 
 // Initialization of the baud rate generator 
-baud_gen # ( .DVSR_WIDTH(DVSR_WIDTH) ) 
+baud_gen # ( 
+    //.DVSR_WIDTH(DVSR_WIDTH) 
+            ) 
         baud_gen_inst  (.clk(clk), 
                         .reset(reset),
                         .dvsr(dvsr),
