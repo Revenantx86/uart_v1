@@ -1,4 +1,4 @@
-module baud_gen #( parameter DVSR_WIDTH = 8; ) (clk,reset,dvsr,tick);
+module baud_gen #( parameter DVSR_WIDTH = 8 ) (clk,reset,dvsr,tick);
 
     // Wire and register definitions // 
     input wire clk; 
