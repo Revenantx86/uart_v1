@@ -1,6 +1,6 @@
 `timescale 1ns / 1ps
 
-module timer_testbench;
+module baud_gen_tb;
 
     // Testbench Signals
     reg clk;
@@ -9,7 +9,7 @@ module timer_testbench;
     wire tick;
 
     // Instantiate the timer module
-    timer uut (
+    baud_gen uut (
         .clk(clk),
         .reset(reset),
         .DVSR(DVSR),

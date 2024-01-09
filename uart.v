@@ -25,9 +25,30 @@
  * - Note 1: Baud controller created
  *
  */
-module UART ();
 
+module uart # 
+( 
+    parameter DATA_WIDTH = 8 
+    parameter DVSR_WIDTH = 8;
+) 
+(
+    input wire clk,
+    input wire reset,
 
+    // -- Input UART -- //
+    input wire rxd,
+    output reg txd,
+);
 
+wire baud_clk;
+reg dvsr;
+
+// Initialization of the baud rate generator 
+baud_gen # ( .DVSR_WIDTH(DVSR_WIDTH) ) 
+        baud_gen_inst  (.clk(clk), 
+                        .reset(reset),
+                        .dvsr(dvsr),
+                        .tick(baud_clk),   
+                        );
 
 endmodule
