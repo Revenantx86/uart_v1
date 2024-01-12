@@ -5,14 +5,14 @@ module baud_gen_tb;
     // Testbench Signals
     reg clk;
     reg reset;
-    reg [10:0] DVSR;
+    reg [8-1:0] dvsr;
     wire tick;
 
     // Instantiate the timer module
     baud_gen uut (
         .clk(clk),
         .reset(reset),
-        .DVSR(DVSR),
+        .dvsr(dvsr),
         .tick(tick)
     );
 
@@ -24,7 +24,7 @@ module baud_gen_tb;
         // Initialize signals
         clk = 0;
         reset = 1;
-        DVSR = 11'd54; // Adjusted for 9600 baud rate
+        dvsr = 11'd54; // Adjusted for 9600 baud rate
         #10; // Wait for the reset
 
         reset = 0;
@@ -38,11 +38,11 @@ module baud_gen_tb;
 
     // Detailed Monitoring to Observe Ticks
     initial begin
-        $monitor("Time = %t ns, DVSR = %d, Tick = %b", $time, DVSR, tick);
+        $monitor("Time = %t ns, DVSR = %d, Tick = %b", $time, dvsr, tick);
 
         // Initialize VCD dump
-        $dumpfile("timer_testbench.vcd");
-        $dumpvars(0, timer_testbench);
+        $dumpfile("behaivoral_tests/vcd/baud_gen_tb.vcd");
+        $dumpvars(0, baud_gen_tb);
 
     end
 
