@@ -29,7 +29,7 @@
 module uart # 
 ( 
     parameter D_W = 8 
-    parameter B_TICK = 16;
+    parameter B_TICK = 16
 ) 
 (
     input wire clk,
