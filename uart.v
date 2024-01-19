@@ -39,7 +39,7 @@ module uart #
     input wire rxd,
 
     // -- input to baud_gen -- //
-    input wire [7:0] dvsr,
+    input wire [15:0] dvsr,
     
 
     // -- uart rx -- //
