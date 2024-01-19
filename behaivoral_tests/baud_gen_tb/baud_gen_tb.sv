@@ -17,14 +17,14 @@ module baud_gen_tb;
     );
 
     // Clock Generation (100 MHz clock -> period is 10 ns)
-    always #1 clk = ~clk; // 5 ns high and 5 ns low
+    always #5 clk = ~clk; // 5 ns high and 5 ns low
 
     // Testbench Logic
     initial begin
         // Initialize signals
         clk = 0;
         reset = 1;
-        dvsr = 11'd54; // Adjusted for 9600 baud rate
+        dvsr = 8'd54; // Adjusted for 9600 baud rate
         #10; // Wait for the reset
 
         reset = 0;
