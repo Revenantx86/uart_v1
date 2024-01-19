@@ -28,7 +28,7 @@
 
 module uart # 
 ( 
-    parameter D_W = 8 
+    parameter D_W = 8,
     parameter B_TICK = 16
 ) 
 (
@@ -56,9 +56,9 @@ baud_gen # ()
 // UART RX module
 uart_rx # (.D_W(D_W), .B_TICK(B_TICK))
         uart_rx_inst  ( .clk(clk),
-                        .rst(rst),
+                        .rst(reset),
                         .tick(baud_clk),
-                        .out_data(rx_data),
+                        .out_data(),
                         .rx_data(rxd),
                         .en(baud_gen_en) );
 
