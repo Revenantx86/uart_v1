@@ -21,7 +21,7 @@ module uart_rx_tb;
     // Instantiate the timer module
     baud_gen baud_gen (
         .clk(clk),
-        .reset(rst),
+        .rst(rst),
         .dvsr(dvsr),
         .tick(baud),
         .en(en)

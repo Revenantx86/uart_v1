@@ -33,33 +33,36 @@ module uart #
 ) 
 (
     input wire clk,
-    input wire reset,
+    input wire rst,
 
     // -- Input UART -- //
     input wire rxd,
-    output reg txd,
+
+    // -- input to baud_gen -- //
+    input wire [7:0] dvsr,
+    
+
+    // -- uart rx -- //
+    output wire [7:0] out_data
 );
 
-// internal reg & wires
 wire baud_clk;
-reg dvsr;
-wire baud_gen_en;
-wire rx_data[D_W-1:0];
+wire en;
 
 // Initialization of the baud rate generator 
-baud_gen # ()
-        baud_gen_inst  (.clk(clk), 
-                        .reset(reset),
+baud_gen baud_gen_inst  (.clk(clk), 
+                        .rst(rst),
                         .dvsr(dvsr),
-                        .tick(baud_clk) );
+                        .tick(baud_clk),
+                        .en(en));
 
 // UART RX module
 uart_rx # (.D_W(D_W), .B_TICK(B_TICK))
         uart_rx_inst  ( .clk(clk),
-                        .rst(reset),
+                        .rst(rst),
                         .tick(baud_clk),
-                        .out_data(),
+                        .out_data(out_data),
                         .rx_data(rxd),
-                        .en(baud_gen_en) );
+                        .en(en) );
 
 endmodule
