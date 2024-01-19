@@ -28,8 +28,8 @@
 
 module uart # 
 ( 
-    //parameter DATA_WIDTH = 8 
-    //parameter DVSR_WIDTH = 8;
+    parameter D_W = 8 
+    parameter B_TICK = 16;
 ) 
 (
     input wire clk,
@@ -43,15 +43,23 @@ module uart #
 // internal reg & wires
 wire baud_clk;
 reg dvsr;
+wire baud_gen_en;
+wire rx_data[D_W-1:0];
 
 // Initialization of the baud rate generator 
-baud_gen # ( 
-    //.DVSR_WIDTH(DVSR_WIDTH) 
-            ) 
+baud_gen # ()
         baud_gen_inst  (.clk(clk), 
                         .reset(reset),
                         .dvsr(dvsr),
-                        .tick(baud_clk),   
-                        );
+                        .tick(baud_clk) );
+
+// UART RX module
+uart_rx # (.D_W(D_W), .B_TICK(B_TICK))
+        uart_rx_inst  ( .clk(clk),
+                        .rst(rst),
+                        .tick(baud_clk),
+                        .out_data(rx_data),
+                        .rx_data(rxd),
+                        .en(baud_gen_en) );
 
 endmodule
