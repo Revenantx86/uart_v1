@@ -47,22 +47,23 @@ module uart #
 );
 
 wire baud_clk;
-wire en;
+wire baud_en;
 
-// Initialization of the baud rate generator 
-baud_gen baud_gen_inst  (.clk(clk), 
-                        .rst(rst),
-                        .dvsr(dvsr),
-                        .tick(baud_clk),
-                        .en(en));
+// UART -> Baud Rate Generator
+baud_gen # () 
+        baud_gen_inst   (.clk(clk), 
+                         .rst(rst),
+                         .dvsr(dvsr),
+                         .baud_clk(baud_clk),
+                         .baud_en(baud_en));
 
-// UART RX module
+// UART -> RX Module
 uart_rx # (.D_W(D_W), .B_TICK(B_TICK))
         uart_rx_inst  ( .clk(clk),
                         .rst(rst),
-                        .tick(baud_clk),
+                        .baud_clk(baud_clk),
                         .out_data(out_data),
                         .rx_data(rxd),
-                        .en(en) );
+                        .baud_en(baud_en));
 
 endmodule

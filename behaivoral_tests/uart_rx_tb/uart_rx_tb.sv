@@ -10,31 +10,31 @@ module uart_rx_tb;
     reg rst;
     reg clk;
     reg tick;
-    wire baud;
-    wire en;
+    wire baud_clk;
+    wire baud_en;
 
     wire [D_W-1:0] out_data;
     reg rx_data;
 
-    reg [8-1:0] dvsr;
+    reg [15:0] dvsr;
 
     // Instantiate the timer module
-    baud_gen baud_gen (
+    baud_gen #()baud_gen (
         .clk(clk),
         .rst(rst),
         .dvsr(dvsr),
-        .tick(baud),
-        .en(en)
+        .baud_clk(baud_clk),
+        .baud_en(baud_en)
     );
 
     // Instantiate the UART RX Module
     uart_rx #(.D_W(D_W), .B_TICK(B_TICK)) uart_rx (
         .rst(rst),
         .clk(clk),
-        .tick(baud),
+        .baud_clk(baud_clk),
         .out_data(out_data),
         .rx_data(rx_data),
-        .en(en)
+        .baud_en(baud_en)
     );
 
     // Clock Generation & Initial declarations

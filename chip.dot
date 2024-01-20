@@ -1,0 +1,27 @@
+digraph G {
+
+  subgraph cluster_rx_logic {
+    style=filled;
+    color="#d3d3d3bc";
+    node [style=filled,color=white, shape=square];
+    receive;
+    rx_fifo;
+    label = "RX Logic";
+    pos = "1!,0!";
+  }
+
+  subgraph cluster_tx_logic {
+    style=filled;
+    color="#d3d3d3bc";
+    node [style=filled,color=white, shape=square];
+    tx_logic 
+    tx_fifo
+    label = "TX Logic";
+    pos = "2!,2!";
+  }
+
+  tx_logic->tx_fifo
+  receive->rx_fifo;
+
+
+}

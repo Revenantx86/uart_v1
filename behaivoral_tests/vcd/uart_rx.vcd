@@ -1,5 +1,5 @@
 $date
-	Fri Jan 19 00:49:24 2024
+	Fri Jan 19 21:34:57 2024
 $end
 $version
 	Icarus Verilog
@@ -9,31 +9,31 @@ $timescale
 $end
 $scope module uart_rx_tb $end
 $var wire 8 ! out_data [7:0] $end
-$var wire 1 " en $end
-$var wire 1 # baud $end
+$var wire 1 " baud_en $end
+$var wire 1 # baud_clk $end
 $var parameter 32 $ B_TICK $end
 $var parameter 32 % D_W $end
 $var reg 1 & clk $end
-$var reg 8 ' dvsr [7:0] $end
+$var reg 16 ' dvsr [15:0] $end
 $var reg 1 ( rst $end
 $var reg 1 ) rx_data $end
 $scope module baud_gen $end
 $var wire 1 & clk $end
-$var wire 8 * dvsr [7:0] $end
+$var wire 16 * dvsr [15:0] $end
 $var wire 1 ( rst $end
-$var wire 1 " en $end
-$var reg 8 + r_reg [7:0] $end
-$var reg 1 # tick $end
+$var wire 1 " baud_en $end
+$var reg 1 # baud_clk $end
+$var reg 16 + r_reg [15:0] $end
 $upscope $end
 $scope module uart_rx $end
+$var wire 1 # baud_clk $end
 $var wire 1 & clk $end
 $var wire 1 ( rst $end
 $var wire 1 ) rx_data $end
-$var wire 1 # tick $end
 $var parameter 32 , B_TICK $end
 $var parameter 32 - D_W $end
-$var reg 1 " en $end
-$var reg 3 . nbits [2:0] $end
+$var reg 1 " baud_en $end
+$var reg 3 . bit_received [2:0] $end
 $var reg 8 / out_data [7:0] $end
 $var reg 4 0 t_counter [3:0] $end
 $var integer 32 1 STATE [31:0] $end
