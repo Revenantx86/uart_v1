@@ -41,9 +41,14 @@ module uart #
     // -- input to baud_gen -- //
     input wire [15:0] dvsr,
     
-
     // -- uart rx -- //
     output wire [7:0] out_data
+
+    // -- uart tx -- //
+    output wire txd;
+    input wire [7:0] input_data;
+    input wire tx_start;
+    output wire tx_done;
 );
 
 wire baud_clk;
@@ -51,19 +56,36 @@ wire baud_en;
 
 // UART -> Baud Rate Generator
 baud_gen # () 
-        baud_gen_inst   (.clk(clk), 
-                         .rst(rst),
-                         .dvsr(dvsr),
-                         .baud_clk(baud_clk),
-                         .baud_en(baud_en));
+        baud_gen_inst (
+            .clk(clk), 
+            .rst(rst),
+            .dvsr(dvsr),
+            .baud_clk(baud_clk),
+            .baud_en(baud_en)
+            );
 
 // UART -> RX Module
 uart_rx # (.D_W(D_W), .B_TICK(B_TICK))
-        uart_rx_inst  ( .clk(clk),
-                        .rst(rst),
-                        .baud_clk(baud_clk),
-                        .out_data(out_data),
-                        .rx_data(rxd),
-                        .baud_en(baud_en));
+        uart_rx_inst ( 
+            .clk(clk),
+            .rst(rst),
+            .baud_clk(baud_clk),
+            .out_data(out_data),
+            .rx_data(rxd),
+            .baud_en(baud_en)
+            );
+
+// UART -> TX Module
+uart_tx #( .D_W(D_W), .B_TICK(B_TICK) ) 
+        uart_tx_inst (
+            .rst(rst),
+            .clk(clk),
+            .baud_clk(baud_clk),
+            .input_data(input_data),
+            .tx_start(tx_start),
+            .baud_en(baud_en),
+            .tx_data(txd),
+            .tx_done(tx_done)
+            );
 
 endmodule
