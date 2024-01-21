@@ -42,13 +42,13 @@ module uart #
     input wire [15:0] dvsr,
     
     // -- uart rx -- //
-    output wire [7:0] out_data
+    output wire [7:0] out_data,
 
     // -- uart tx -- //
-    output wire txd;
-    input wire [7:0] input_data;
-    input wire tx_start;
-    output wire tx_done;
+    output wire txd,
+    input wire [7:0] input_data,
+    input wire tx_start,
+    output wire tx_done
 );
 
 wire baud_clk;
