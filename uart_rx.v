@@ -5,11 +5,11 @@ module uart_rx
     parameter B_TICK = 16
 )
 (
-    input rst,
-    input clk,
-    input baud_clk,
+    input wire rst,
+    input wire clk,
+    input wire baud_clk,
     output reg[D_W-1:0] out_data,
-    input rx_data,
+    input wire rx_data,
     output reg baud_en
 );
 
@@ -23,7 +23,7 @@ enum {IDLE,START,DATA,STOP} STATE; // States
 
 // -- -- State Machine -- -- //
 // Cases -> IDLE, START, DATA, STOP
-always @(posedge clk) 
+always @(posedge clk or posedge rst) 
 begin    
     // reset registers and state
     if(rst) begin
@@ -33,9 +33,9 @@ begin
         out_data <= 0;
         baud_en <= 0;
     end
-    
-    else
+
     // State machine begin // 
+    else
     begin
         case(STATE)     
             

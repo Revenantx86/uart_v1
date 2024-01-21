@@ -6,5 +6,9 @@ rx-test:
 	iverilog -g2012 -o behaivoral_tests/uart_rx_tb/rx_test.vvp  behaivoral_tests/uart_rx_tb/uart_rx_tb.sv uart_rx.v baud_gen.v
 	vvp -n behaivoral_tests/uart_rx_tb/rx_test.vvp
 
+tx-test:
+	iverilog -g2012 -o behaivoral_tests/uart_tx_tb/tx_test.vvp  behaivoral_tests/uart_tx_tb/uart_tx_tb.sv uart_tx.v baud_gen.v
+	vvp -n behaivoral_tests/uart_tx_tb/tx_test.vvp
+
 chip-diagram:
 	dot -T png chip.dot -o chip.png

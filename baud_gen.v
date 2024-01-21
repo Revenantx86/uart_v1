@@ -1,4 +1,4 @@
-module baud_gen #()
+module baud_gen 
 (
     input wire clk,
     input wire rst,
