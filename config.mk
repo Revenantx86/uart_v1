@@ -3,7 +3,8 @@ export PLATFORM    = sky130hd
 
 export VERILOG_FILES = ./user_design/$(DESIGN_NICKNAME)/uart.v \
 	./user_design/$(DESIGN_NICKNAME)/uart_rx.v \
-	./user_design/$(DESIGN_NICKNAME)/uart_tx.v 
+	./user_design/$(DESIGN_NICKNAME)/uart_tx.v \
+	./user_design/$(DESIGN_NICKNAME)/baud_gen.v 
 
 export SDC_FILE      = ./user_design/$(DESIGN_NICKNAME)/constraint.sdc
 
